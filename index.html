@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>KSR UBHI</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    /* Reset and base */
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f8f9fa, #cfe2ff);
+      color: #212529;
+      scroll-behavior: smooth;
+    }
+  
+    section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3rem 1rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      position: relative;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Landing Page */
+    #section-landing {
+      background: white;
+      color: white;
+      text-align: center;
+      padding-top: 8rem;
+      padding-bottom: 10rem;
+      opacity: 1;
+      transform: none;
+    }
+    #section-landing h1 {
+      color : blue;
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      animation: fadeSlideInDown 1s ease forwards;
+    }
+    #section-landing p {
+      color : blue;
+      font-size: 1.25rem;
+      max-width: 520px;
+      margin: 0 auto 2rem auto;
+      animation: fadeIn 1.5s ease forwards;
+    }
+    #section-landing button {
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.75rem 2.5rem;
+      border-radius: 9999px;
+      background: #ffc107;
+      border: none;
+      color: #212529;
+      box-shadow: 0 4px 10px rgb(255 193 7 / 0.5);
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      animation: fadeIn 2s ease forwards;
+    }
+    #section-landing button:hover {
+      background-color: #e0a800;
+      transform: scale(1.05);
+    }
+
+    /* Other sections */
+    #section-1, #section-2, #section-3, #section-4 {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.05);
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 3rem;
+      padding: 2.5rem;
+    }
+    #section-1 h2,
+    #section-2 h2,
+    #section-3 h2,
+    #section-4 h2 {
+      margin-bottom: 1.25rem;
+      color: #0d6efd;
+      font-weight: 700;
+      text-align: center;
+    }
+    /* Back button added top left in section-1 */
+    #section-1 .btn-back {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-weight: 600;
+      font-size: 1rem;
+      background: transparent;
+      border: none;
+      color: #0d6efd;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    #section-1 .btn-back:hover {
+      color: #084298;
+      text-decoration: underline;
+    }
+
+    #section-2 ul {
+      list-style: none;
+      padding-left: 0;
+      font-weight: 600;
+      color: #495057;
+    }
+    #section-2 ul li {
+      margin-bottom: 0.5rem;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ced4da;
+      border-radius: 0.375rem;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    form input:focus, form select:focus {
+      outline: none;
+      border-color: #0d6efd;
+      box-shadow: 0 0 5px rgba(13,110,253,.5);
+    }
+    form button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      border-radius: 0.5rem;
+      background: #0d6efd;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    form button:hover {
+      background: #084298;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      background: red;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      font-size: 0.9rem;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+    }
+    footer a {
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    footer a:hover {
+      color: #fd7e14;
+      text-decoration: underline;
+    }
+    footer .footer-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Animations */
+    @keyframes fadeSlideInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">Kepalangmerahan</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('landing')">Beranda</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('1')">Apa Itu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('2')">Kegiatan</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('3')">Kontak</a></li>
+          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('4')">Gabung</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Landing Page -->
+  <section id="section-landing" class="text-center">
+    <h1>Korps Sukarelawan</h1>
+    <p>Bersama Leni KSR nyeni.</p>
+    <button class="btn" onclick="showSection('1')">Mulai</button>
+  </section>
+
+  <!-- Apa Itu Palang Merah -->
+  <section id="section-1" class="d-none mx-auto">
+    <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i> Back</button>
+    <h2>Apa Itu Palang Merah?</h2>
+    <p class="mt-3">
+      Palang Merah adalah organisasi kemanusiaan yang netral, sukarela, dan berbasis relawan yang membantu korban bencana, konflik, dan memberikan layanan kesehatan masyarakat.
+    </p>
+    <div class="mt-4 d-flex justify-content-center gap-2">
+      <button class="btn btn-outline-primary" onclick="showSection('2')">Next</button>
+    </div>
+  </section>
+
+  <!-- Kegiatan Kemanusiaan -->
+  <section id="section-2" class="d-none mx-auto">
+    <h2>Kegiatan Kemanusiaan</h2>
+    <ul>
+      <li>Donor Darah Massal</li>
+      <li>Pelatihan Pertolongan Pertama</li>
+      <li>Aksi Sosial di Wilayah Bencana</li>
+    </ul>
+    <div class="mt-4 d-flex justify-content-center gap-2">
+      <button class="btn btn-outline-primary" onclick="showSection('1')">Back</button>
+      <button class="btn btn-primary" onclick="showSection('3')">Next</button>
+    </div>
+  </section>
+
+  <!-- Hubungi Kami -->
+  <section id="section-3" class="d-none mx-auto">
+    <h2>Hubungi Kami</h2>
+    <p>Email: kepalangmerahan@bhinneka.ac.id</p>
+    <p>Telepon: +62 812 3456 7890</p>
+    <div class="mt-4 d-flex justify-content-center gap-2">
+      <button class="btn btn-outline-primary" onclick="showSection('2')">Back</button>
+      <button class="btn btn-primary" onclick="showSection('4')">Next</button>
+    </div>
+  </section>
+
+  <!-- Formulir Pendaftaran Relawan -->
+  <section id="section-4" class="d-none mx-auto">
+    <h2>Formulir Pendaftaran Relawan</h2>
+    <form id="form-relawan" class="mx-auto" style="max-width: 400px;" onsubmit="event.preventDefault(); kirimWhatsApp();">
+      <div>
+        <input type="text" id="nama" placeholder="Nama Lengkap" required />
+      </div>
+      <div>
+        <input type="email" id="email" placeholder="Email" required />
+      </div>
+      <div>
+        <input type="tel" id="telepon" placeholder="Nomor Telepon" required />
+      </div>
+      <div>
+        <select id="kegiatan" required>
+          <option disabled selected>-- Pilih Kegiatan --</option>
+          <option>Donor Darah</option>
+          <option>Pertolongan Pertama</option>
+          <option>Aksi Sosial</option>
+        </select>
+      </div>
+      <div class="d-flex gap-2">
+        <button type="button" class="btn btn-outline-primary flex-grow-1" onclick="showSection('3')">Back</button>
+        <button type="submit" class="btn btn-success flex-grow-1">Gabung via WhatsApp</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      &copy; 2025 KSR Universitas Bhinneka PGRI. All rights reserved. |
+      <a href="mailto:kepalangmerahan@bhinneka.ac.id">Contact Us</a>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function showSection(num) {
+      const sections = ['section-landing', 'section-1', 'section-2', 'section-3', 'section-4'];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.add('d-none');
+          el.classList.remove('visible');
+        }
+      });
+      const active = document.getElementById('section-' + num);
+      if (active) {
+        active.classList.remove('d-none');
+        active.classList.add('visible');
+      }
+      if (num === 'landing') {
+        const landing = document.getElementById('section-landing');
+        landing.classList.remove('d-none');
+        landing.classList.add('visible');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    // Tampilkan landing saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', () => {
+      showSection('landing');
+    });
+
+    // Animasi saat scroll
+    const sectionsToAnimate = ['section-1', 'section-2', 'section-3', 'section-4'];
+    function onScrollAnimate() {
+      sectionsToAnimate.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.85) {
+            el.classList.add('visible');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', onScrollAnimate);
+
+    // Fungsi kirim data ke WhatsApp
+    function kirimWhatsApp() {
+      const nama = document.getElementById("nama").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const telepon = document.getElementById("telepon").value.trim();
+      const kegiatan = document.getElementById("kegiatan").value;
+
+      if (!nama || !email || !telepon || !kegiatan) {
+        alert("Silakan lengkapi semua data terlebih dahulu.");
+        return;
+      }
+
+      const pesan = `Halo, saya ingin mendaftar sebagai relawan.%0A%0A` +
+                    `Nama: ${nama}%0AEmail: ${email}%0ATelepon: ${telepon}%0AKegiatan: ${kegiatan}`;
+      const nomorWa = "628998381692";
+      const link = `https://wa.me/${nomorWa}?text=${pesan}`;
+      window.open(link, "_blank");
+    }
+  </script>
+</body>
+</html>
