@@ -98,7 +98,10 @@
       text-align: center;
     }
     /* Back button added top left in section-1 */
-    #section-1 .btn-back {
+    #section-1 .btn-back,
+    #section-2 .btn-back,
+    #section-3 .btn-back,
+    #section-4 .btn-back {
       position: absolute;
       top: 15px;
       left: 15px;
@@ -199,24 +202,33 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Kepalangmerahan</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('landing')">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('1')">Apa Itu</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('2')">Kegiatan</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('3')">Kontak</a></li>
-          <li class="nav-item"><a class="nav-link" href="#" onclick="showSection('4')">Gabung</a></li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#section-landing" onclick="showSection('landing')">Kepalangmerahan</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#section-landing" onclick="showSection('landing')">Beranda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-1" onclick="showSection('1')">Apa Itu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-2" onclick="showSection('2')">Kegiatan</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-3" onclick="showSection('3')">Kontak</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#section-4" onclick="showSection('4')">Gabung</a>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>
 
   <!-- Landing Page -->
   <section id="section-landing" class="text-center">
@@ -226,8 +238,8 @@
   </section>
 
   <!-- Apa Itu Palang Merah -->
-  <section id="section-1" class="d-none mx-auto">
-    <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i> Back</button>
+  <section id="section-1" class="mx-auto">
+    <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i>Home</button>
     <h2>Apa Itu Palang Merah?</h2>
     <p class="mt-3">
       Palang Merah adalah organisasi kemanusiaan yang netral, sukarela, dan berbasis relawan yang membantu korban bencana, konflik, dan memberikan layanan kesehatan masyarakat.
@@ -239,7 +251,9 @@
 
   <!-- Kegiatan Kemanusiaan -->
   <section id="section-2" class="d-none mx-auto">
+        <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i>Home</button>
     <h2>Kegiatan Kemanusiaan</h2>
+    <p>Bergabunglah dalam kegiatan yang membawa perubahan nyata! Setiap langkah yang kita ambil bersama memberikan harapan dan meringankan beban mereka yang membutuhkan. Berikut adalah beberapa kegiatan yang dapat Anda ikuti:</p>
     <ul>
       <li>Donor Darah Massal</li>
       <li>Pelatihan Pertolongan Pertama</li>
@@ -253,6 +267,7 @@
 
   <!-- Hubungi Kami -->
   <section id="section-3" class="d-none mx-auto">
+        <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i>Home</button>
     <h2>Hubungi Kami</h2>
     <p>Email: kepalangmerahan@bhinneka.ac.id</p>
     <p>Telepon: +62 812 3456 7890</p>
@@ -264,7 +279,10 @@
 
   <!-- Formulir Pendaftaran Relawan -->
   <section id="section-4" class="d-none mx-auto">
+        <button class="btn-back" onclick="showSection('landing')"><i class="bi bi-arrow-left"></i>Home</button>
     <h2>Formulir Pendaftaran Relawan</h2>
+    <p>ingin bergabung dengan kami?</p>
+    <p>TUNGGU APA LAGI</p>
     <form id="form-relawan" class="mx-auto" style="max-width: 400px;" onsubmit="event.preventDefault(); kirimWhatsApp();">
       <div>
         <input type="text" id="nama" placeholder="Nama Lengkap" required />
@@ -344,21 +362,16 @@
 
     // Fungsi kirim data ke WhatsApp
     function kirimWhatsApp() {
-      const nama = document.getElementById("nama").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const telepon = document.getElementById("telepon").value.trim();
+      const nama = document.getElementById("nama").value;
+      const email = document.getElementById("email").value;
+      const telepon = document.getElementById("telepon").value;
       const kegiatan = document.getElementById("kegiatan").value;
-
       if (!nama || !email || !telepon || !kegiatan) {
-        alert("Silakan lengkapi semua data terlebih dahulu.");
+        alert("Hayolooo diisi dulu yaaa:).");
         return;
       }
-
-      const pesan = `Halo, saya ingin mendaftar sebagai relawan.%0A%0A` +
-                    `Nama: ${nama}%0AEmail: ${email}%0ATelepon: ${telepon}%0AKegiatan: ${kegiatan}`;
-      const nomorWa = "628998381692";
-      const link = `https://wa.me/${nomorWa}?text=${pesan}`;
-      window.open(link, "_blank");
+      const pesan = `Halo, saya ingin mendaftar sebagai relawan.%0A%0ANama: ${nama}%0AEmail: ${email}%0ATelepon: ${telepon}%0AKegiatan: ${kegiatan}`;
+      window.open(`https://wa.me/628998381692?text=${pesan}`, "_blank");
     }
   </script>
 </body>
